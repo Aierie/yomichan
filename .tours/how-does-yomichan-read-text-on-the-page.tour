@@ -1,0 +1,307 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "How does Yomichan read text on the page?",
+  "steps": [
+    {
+      "file": "ext/js/app/content-script-main.js",
+      "description": "# Starts at content script",
+      "line": 39
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# Instantiate TextScanner",
+      "line": 77
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# TextScanner \nMain class for text scanning",
+      "line": 22
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": " # _getSearchContext option in TextScanner\n This function allows the text scanner to access input handling options, eg. keybindings for Copy, Pronounce",
+      "line": 320
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# TextScanner adds event listeners to the window\nThis class is actually used in multiple pages. In internal extension pages, it's adding event listeners to a subset of the page's elements, in external pages, it's adding these listeners to the window.",
+      "line": 775
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Red herring: TextScanner.search\nUsed to find things only within extension itself (does not affect external pages).",
+      "line": 284
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Red herring: restores last search state after options change",
+      "line": 276
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# mouseOver aborts waiting for scan if element is ignored",
+      "line": 394
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Debouncing mousemove text scanning",
+      "line": 953
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Entrypoint for searching at a point\nThis is used in mousemove, click etc event handlers",
+      "line": 916
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# There's a filter here to make sure we ignore points based on provided options",
+      "line": 931
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Get the text source \nThere's some branching logic based on the element that's at the point. this._deepContentScan === true means that it's possible to let yomichan read text covered by other elements.",
+      "line": 935
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# enable/disable text scanner",
+      "line": 628
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# CSS zoom is not standard, we should be able to ignore?\nIs that a valid point?",
+      "line": 447
+    },
+    {
+      "file": "ext/js/dom/dom-text-scanner.js",
+      "description": "# WHat do we use the newlines for?",
+      "line": 186
+    },
+    {
+      "file": "ext/js/dom/dom-text-scanner.js",
+      "description": "# WHat do we use the newlines for?",
+      "line": 272
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# Assuming that this actually gets 16 chars and searches with them\nNote: おはようございます is ohaiyogozaimas and matches a single dictionary entry with 9 chars, so 16 chars is actually pretty reasonable",
+      "line": 867
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# TODO: understand what each of these options is",
+      "line": 860
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# This is for Kanji, so it gets less characters",
+      "line": 896
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# To validate: extracting a sentence is for keeping context for anki?",
+      "line": 903
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# To validate: extracting a sentence is for keeping context for anki?",
+      "line": 876
+    },
+    {
+      "file": "ext/js/comm/api.js",
+      "description": "# from yomichan.api.termsFind",
+      "line": 32
+    },
+    {
+      "file": "ext/js/background/backend.js",
+      "description": "# From api.termsFind",
+      "line": 417
+    },
+    {
+      "file": "ext/js/language/translator.js",
+      "description": "# It's my assumption that the text here is up to scanningOptions.length long\nUnsure if true, needs validation",
+      "line": 77,
+      "selection": {
+        "start": {
+          "line": 74,
+          "character": 28
+        },
+        "end": {
+          "line": 74,
+          "character": 37
+        }
+      }
+    },
+    {
+      "file": "ext/js/language/translator.js",
+      "description": "# This is to convert the kana into different variants",
+      "line": 268
+    },
+    {
+      "file": "ext/js/language/translator.js",
+      "description": "# After all the text is normalized and transformed, find entries for all unique (possible) terms\nI don't think terms are validated here, yet - we have a bunch of character groupings, but not all of them make sense.",
+      "line": 251
+    },
+    {
+      "file": "ext/js/data/sandbox/string-util.js",
+      "description": "# UTF16 surrogate pair handling\nhttps://en.wikipedia.org/wiki/UTF-16#:~:text=most%20emoji%20characters.-,Code%20points%20from%20U%2B010000%20to%20U%2B10FFFF,-%5Bedit%5D",
+      "line": 21,
+      "selection": {
+        "start": {
+          "line": 29,
+          "character": 12
+        },
+        "end": {
+          "line": 29,
+          "character": 29
+        }
+      }
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# TextSourceElement handling is different from TextSourceRange handling\ntextSource.fullContent is specific to TextSourceElement",
+      "line": 597
+    },
+    {
+      "file": "ext/js/display/query-parser.js",
+      "description": "# textSource used to get the offset in the sentence\nTo form correct query params when part of the query is clicked - offset 1 means starting from the second word in the current phrase in the query builder, offset 2 means the third etc",
+      "line": 276
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# textSource used to get bounding rects\nThis is one reason why the imposter needs to exist for interactives/inputs/images?",
+      "line": 606
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# END #1: we're done with the range (textSource) manipulation\nWe've gotten the text we need and we should try to understand what the state of things is at this point",
+      "line": 884
+    },
+    {
+      "file": "ext/js/language/text-scanner.js",
+      "description": "# END #2: we're done with the range (textSource) manipulation\nWe've gotten the text we need and we should try to understand what the state of things is at this point",
+      "line": 903
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# ignore the popup when scanning for text",
+      "line": 542
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# ignore the popup when scanning for text",
+      "line": 552
+    },
+    {
+      "file": "ext/js/app/frontend.js",
+      "description": "# Red herring: This is when there's a selection already\nEmpty if we're going to be using the caret to create a range. \nNot empty if we're using the current selection.",
+      "line": 757,
+      "selection": {
+        "start": {
+          "line": 756,
+          "character": 11
+        },
+        "end": {
+          "line": 756,
+          "character": 28
+        }
+      }
+    },
+    {
+      "file": "ext/js/dom/document-focus-controller.js",
+      "description": "# Red herring: internal focus controller\nInteresting consideration around restoring selected ranges!",
+      "line": 1,
+      "selection": {
+        "start": {
+          "line": 24,
+          "character": 7
+        },
+        "end": {
+          "line": 24,
+          "character": 30
+        }
+      }
+    },
+    {
+      "file": "ext/popup-preview.html",
+      "description": "# Red herring: popup-preview is used on the settings page \nto show what customizations look like",
+      "line": 1
+    },
+    {
+      "file": "ext/search.html",
+      "description": "# Red herring: search is not directly related to the popup\nThey have similar ui, but search is a page generally shown independently to search the dirctionary with a text input.",
+      "line": 1,
+      "selection": {
+        "start": {
+          "line": 63,
+          "character": 30
+        },
+        "end": {
+          "line": 63,
+          "character": 48
+        }
+      }
+    },
+    {
+      "file": "ext/js/display/query-parser.js",
+      "description": "# Red herring: Query param display-related",
+      "line": 1
+    },
+    {
+      "file": "ext/js/general/text-source-map.js",
+      "description": "# Red herring: This is for transforming text to different forms, not dealing with DOM",
+      "line": 1
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Later: non-text selection - img, button, select",
+      "line": 41
+    },
+    {
+      "file": "ext/data/schemas/options-schema.json",
+      "description": "# Later: Default sentence parsing length is hundreds of code points",
+      "line": 1025,
+      "selection": {
+        "start": {
+          "line": 1014,
+          "character": 30
+        },
+        "end": {
+          "line": 1014,
+          "character": 45
+        }
+      }
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Later: non-text selection - input",
+      "line": 43
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Later: non-text selection - textarea",
+      "line": 49
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Later: deepContentScan to get items covered by other elements\nThis has happened before - a pseudoelement covered text I was interested in on a Baidu website, leading to an inability to get a caret at the correct point.",
+      "line": 55
+    },
+    {
+      "file": "ext/data/schemas/options-schema.json",
+      "description": "# Later: Default length to scan ahead is 16?",
+      "line": 666,
+      "selection": {
+        "start": {
+          "line": 431,
+          "character": 38
+        },
+        "end": {
+          "line": 431,
+          "character": 44
+        }
+      }
+    }
+  ],
+  "ref": "master"
+}
