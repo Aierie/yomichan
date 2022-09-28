@@ -103,9 +103,34 @@
       "line": 903
     },
     {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Go really far back and really far forward",
+      "pattern": "^[^\\S\\n]*const startLength = source\\.setStartOffset\\(extent, layoutAwareScan\\);"
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Set the start and end positions to... close to the original?",
+      "pattern": "^[^\\S\\n]*let pos1 = startLength;"
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Backtrack the start position until you hit a termination character\nSome handling here to include complete quotes, all matches should have all pairs of quotes matched",
+      "pattern": "^[^\\S\\n]*let quoteStack = \\[\\];"
+    },
+    {
+      "file": "ext/js/dom/document-util.js",
+      "description": "# Move forward until you hit a termination character + complete quotes\nActually the \"complete quotes\" thing... some part of it relies on an unmatched forward quote being in the start.",
+      "pattern": "^[^\\S\\n]*quoteStack = \\[\\];"
+    },
+    {
       "file": "ext/js/language/text-scanner.js",
       "description": "# To validate: extracting a sentence is for keeping context for anki?",
       "line": 876
+    },
+    {
+      "file": "ext/js/dom/dom-text-scanner.js",
+      "description": "# Basically the lineHasWhitespace prop is for collapsing whitespace... like the commment says",
+      "line": 180
     },
     {
       "file": "ext/js/comm/api.js",
